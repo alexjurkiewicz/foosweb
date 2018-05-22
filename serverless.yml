@@ -1,0 +1,90 @@
+service: foosweb
+
+provider:
+  name: aws
+  runtime: python3.6
+  region: ap-southeast-2
+  apiKeys:
+    - aj
+  memorySize: 128
+  logRetentionInDays: 7
+  environment:
+    DYNAMODB_MATCH_TABLE: ${self:service}-${opt:stage, self:provider.stage}-match
+    DYNAMODB_PLAYER_TABLE: ${self:service}-${opt:stage, self:provider.stage}-player
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/${self:service}*"
+
+resources:
+  Resources:
+    DynamoDbTablePlayer:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: PlayerName
+            AttributeType: S
+        KeySchema:
+          - AttributeName: PlayerName
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:provider.environment.DYNAMODB_PLAYER_TABLE}
+    DynamoDbTableMatch:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: timestamp
+            AttributeType: N
+        KeySchema:
+          - AttributeName: timestamp
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:provider.environment.DYNAMODB_MATCH_TABLE}
+
+
+package:
+ include:
+   - kfoos/**
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: hello
+          method: get
+      - http:
+          path: hello
+          method: post
+
+  match:
+    handler: handler.addMatch
+    events:
+      - http:
+          path: match
+          method: post
+
+  player:
+    handler: handler.listPlayers
+    events:
+      - http:
+          path: player
+          method: get
+
+plugins:
+  - serverless-python-requirements
+  - serverless-dynamodb-local
+
+custom:
+  pythonRequirements:
+    dockerizePip: true

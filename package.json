@@ -1,0 +1,14 @@
+{
+  "devDependencies": {
+    "serverless": "^1.27.2",
+    "serverless-dynamodb-local": "^0.2.30",
+    "serverless-python-requirements": "^4.0.3"
+  },
+  "name": "kfoos",
+  "version": "1.0.0",
+  "description": "Kounta Foosball Skill Tracker",
+  "repository": "http://github.com/alexjurkiewicz/kfoos",
+  "author": "Alex Jurkiewicz <alexj@kounta.com>",
+  "license": "MIT",
+  "private": true
+}
