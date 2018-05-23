@@ -1,0 +1,7 @@
+{
+  "body": {
+    "team1": ["alex", "elliot"],
+    "team2": ["jamie", "brendan"],
+    "score": [10, 0]
+  }
+}
