@@ -109,8 +109,12 @@ def addMatch(event, context):
     old_team1_ratings = _get_player_ratings_from_ddb(player_table, team1_names)
     old_team2_ratings = _get_player_ratings_from_ddb(player_table, team2_names)
 
+    total_score = sum(data['score'])
+    win_share = [score / total_score for score in data['score']]
+    ranks = [1-share for share in win_share]
+
     new_team1_ratings, new_team2_ratings = trueskill.rate(
-        [old_team1_ratings, old_team2_ratings], ranks=data['score'])
+        [old_team1_ratings, old_team2_ratings], ranks=ranks)
 
     for player in itertools.chain(zip(team1_names, new_team1_ratings),
                                   zip(team2_names, new_team2_ratings)):
