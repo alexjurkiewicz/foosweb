@@ -63,9 +63,11 @@ functions:
       - http:
           path: hello
           method: get
+          cors: true
       - http:
           path: hello
           method: post
+          cors: true
 
   match:
     handler: handler.addMatch
@@ -73,6 +75,7 @@ functions:
       - http:
           path: match
           method: post
+          cors: true
 
   listMatches:
     handler: handler.listMatches
@@ -80,6 +83,7 @@ functions:
       - http:
           path: match
           method: get
+          cors: true
 
   player:
     handler: handler.listPlayers
@@ -87,6 +91,7 @@ functions:
       - http:
           path: player
           method: get
+          cors: true
 
 plugins:
   - serverless-python-requirements
