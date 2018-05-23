@@ -11,3 +11,7 @@ def addMatch(event, context):
 
 def listPlayers(event, context):
     return foosweb.listPlayers(event, context)
+
+
+def listMatches(event, context):
+    return foosweb.listMatches(event, context)

@@ -7,7 +7,7 @@ import itertools
 import boto3
 import trueskill
 
-MATCHE_TABLE_NAME = os.environ['DYNAMODB_MATCH_TABLE']
+MATCH_TABLE_NAME = os.environ['DYNAMODB_MATCH_TABLE']
 PLAYER_TABLE_NAME = os.environ['DYNAMODB_PLAYER_TABLE']
 DYNAMO_KWARGS = {
     # XXX for testing
@@ -16,31 +16,32 @@ DYNAMO_KWARGS = {
 }
 
 
+# Base setup
+dynamodb = boto3.resource('dynamodb', **DYNAMO_KWARGS)
+_player_table = None
+_match_table = None
+
+
+def get_player_table():
+    global _player_table
+    if not _player_table:
+        _player_table = dynamodb.Table(PLAYER_TABLE_NAME)
+    return _player_table
+
+
+def get_match_table():
+    global _match_table
+    if not _match_table:
+        _match_table = dynamodb.Table(MATCH_TABLE_NAME)
+    return _match_table
+
+
 # This is a workaround for: http://bugs.python.org/issue16535
 class DecimalEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, decimal.Decimal):
             return float(obj)
         return super(DecimalEncoder, self).default(obj)
-
-
-class Player:
-    @staticmethod
-    def from_dynamo(dynamo_record):
-        p = Player()
-        if 'Item' in dynamo_record:
-            p.mu = float(dynamo_record['Item']['mu'])
-            p.sigma = float(dynamo_record['Item']['sigma'])
-            p.rating
-        else:
-            new = trueskill.Rating()
-            p.mu = new.mu
-            p.sigma = new.sigma
-        return p
-
-    def __init__(self, mu, sigma):
-        self.mu = mu
-        self.sigma = sigma
 
 
 def hello(event, context):
@@ -96,9 +97,8 @@ def json_player(p):
 
 
 def addMatch(event, context):
-    dynamodb = boto3.resource('dynamodb', **DYNAMO_KWARGS)
-    player_table = dynamodb.Table(PLAYER_TABLE_NAME)
-    match_table = dynamodb.Table(MATCHE_TABLE_NAME)
+    player_table = get_player_table()
+    match_table = get_match_table()
 
     if 'body' not in event:
         raise Exception("No HTTP POST body")
@@ -145,9 +145,21 @@ def addMatch(event, context):
 
 
 def listPlayers(event, context):
-    dynamodb = boto3.resource('dynamodb', **DYNAMO_KWARGS)
-    table = dynamodb.Table(PLAYER_TABLE_NAME)
+    table = get_player_table()
 
+    result = table.scan()
+
+    response = {
+        "statusCode": 200,
+        "body": json.dumps(result['Items'], cls=DecimalEncoder,
+                           indent=2, separators=(',', ': '))
+    }
+
+    return response
+
+
+def listMatches(event, context):
+    table = get_match_table()
     result = table.scan()
 
     response = {

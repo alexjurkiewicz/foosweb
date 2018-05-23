@@ -35,7 +35,7 @@ resources:
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
+          WriteCapacityUnits: 2
         TableName: ${self:provider.environment.DYNAMODB_PLAYER_TABLE}
     DynamoDbTableMatch:
       Type: AWS::DynamoDB::Table
@@ -74,6 +74,13 @@ functions:
           path: match
           method: post
 
+  listMatches:
+    handler: handler.listMatches
+    events:
+      - http:
+          path: match
+          method: get
+
   player:
     handler: handler.listPlayers
     events:
@@ -84,7 +91,14 @@ functions:
 plugins:
   - serverless-python-requirements
   - serverless-dynamodb-local
+  - serverless-domain-manager
 
 custom:
   pythonRequirements:
     dockerizePip: true
+  customDomain:
+    domainName: foosweb.jurkiewi.cz
+    basePath: ''
+    stage: ${opt:stage, self:provider.stage}
+    createRoute53Record: true
+    endpointType: regional
