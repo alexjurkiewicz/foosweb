@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "create-react-app": "^1.5.2",
     "serverless": "^1.27.2",
     "serverless-domain-manager": "^2.4.0",
     "serverless-dynamodb-local": "^0.2.30",
