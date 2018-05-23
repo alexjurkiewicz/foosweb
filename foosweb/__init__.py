@@ -130,7 +130,7 @@ def addMatch(event, context):
         "team1_after": [
             json_player(p) for p in zip(team1_names, new_team1_ratings)],
         "team2_after": [
-            json_player(p) for p in zip(team1_names, new_team2_ratings)],
+            json_player(p) for p in zip(team2_names, new_team2_ratings)],
     }
 
     _save_match_to_ddb(match_table, match)
