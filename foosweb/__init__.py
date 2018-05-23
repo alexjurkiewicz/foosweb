@@ -137,7 +137,8 @@ def addMatch(event, context):
 
     response = {
         "statusCode": 200,
-        "body": json.dumps(match, cls=DecimalEncoder)
+        "body": json.dumps(match, cls=DecimalEncoder,
+                           indent=2, separators=(',', ': '))
     }
 
     return response
@@ -151,7 +152,8 @@ def listPlayers(event, context):
 
     response = {
         "statusCode": 200,
-        "body": json.dumps(result['Items'], cls=DecimalEncoder)
+        "body": json.dumps(result['Items'], cls=DecimalEncoder,
+                           indent=2, separators=(',', ': '))
     }
 
     return response
