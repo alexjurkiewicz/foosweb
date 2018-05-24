@@ -102,7 +102,7 @@ custom:
   pythonRequirements:
     dockerizePip: true
   customDomain:
-    domainName: foosweb.jurkiewi.cz
+    domainName: api.foosweb.jurkiewi.cz
     basePath: ''
     stage: ${opt:stage, self:provider.stage}
     createRoute53Record: true
