@@ -41,7 +41,7 @@ class Ranking extends Component {
       event.preventDefault(); return;
     }
 
-    fetch('https://foosweb.jurkiewi.cz/match', {
+    fetch('https://api.foosweb.jurkiewi.cz/match', {
       body: JSON.stringify(match),
       headers: {
         'content-type': 'application/json'

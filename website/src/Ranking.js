@@ -4,7 +4,7 @@ class Ranking extends Component {
   constructor(props) {
     super(props);
     this.state = {rankingData: {}};
-    fetch('https://foosweb.jurkiewi.cz/player')
+    fetch('https://api.foosweb.jurkiewi.cz/player')
       .then(function(response) {
         console.log(response);
         this.state.rankingData = response.body;
