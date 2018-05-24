@@ -13,6 +13,7 @@ class App extends Component {
           <h1 className="App-title">Kounta Foosball Tracker</h1>
         </header>
         <NewGame/>
+        <hr/>
         <Ranking/>
       </div>
     );
