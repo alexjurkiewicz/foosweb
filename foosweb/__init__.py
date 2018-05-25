@@ -152,7 +152,12 @@ def listPlayers(event, context):
     response = {
         "statusCode": 200,
         "body": json.dumps(result['Items'], cls=DecimalEncoder,
-                           indent=2, separators=(',', ': '))
+                           indent=2, separators=(',', ': ')),
+        "headers": {
+            "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent",
+            "Access-Control-Allow-Origin": "*",
+        }
     }
 
     return response
@@ -165,7 +170,12 @@ def listMatches(event, context):
     response = {
         "statusCode": 200,
         "body": json.dumps(result['Items'], cls=DecimalEncoder,
-                           indent=2, separators=(',', ': '))
+                           indent=2, separators=(',', ': ')),
+        "headers": {
+            "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent",
+            "Access-Control-Allow-Origin": "*",
+        }
     }
 
     return response
