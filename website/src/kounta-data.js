@@ -4,5 +4,6 @@ export const KountaPlayers = [
   'Jamie',
   'Brendan',
   'Jingbo',
-  'Greg'
+  'Greg',
+  'Nick'
 ];
