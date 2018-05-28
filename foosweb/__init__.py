@@ -142,6 +142,7 @@ def addMatch(event, context):
     response = {
         "statusCode": 200,
         "body": json.dumps(match, cls=DecimalEncoder, indent=2, separators=(",", ": ")),
+        "headers": CORS_HEADERS,
     }
 
     return response

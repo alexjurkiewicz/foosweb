@@ -12,5 +12,8 @@
   "repository": "http://github.com/alexjurkiewicz/kfoos",
   "author": "Alex Jurkiewicz <alexj@kounta.com>",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "scripts": {
+    "deploy": "sls deploy"
+  }
 }

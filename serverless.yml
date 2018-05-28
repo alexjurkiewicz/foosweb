@@ -54,8 +54,11 @@ resources:
 
 
 package:
- include:
-   - kfoos/**
+  include:
+    - kfoos/**
+  exclude:
+    - node_modules/**
+    - website/**
 
 functions:
   hello:
