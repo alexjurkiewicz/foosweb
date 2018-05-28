@@ -21,7 +21,7 @@ class Ranking extends Component {
       })
       // Sort top to bottom
       .then(function(data) {
-        data = data.sort((a, b) => {
+        return data.sort((a, b) => {
           return b.mu - a.mu;
         });
       })

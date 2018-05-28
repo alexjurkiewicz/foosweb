@@ -34,7 +34,7 @@ class Ranking extends Component {
     let match = {
       'team1': [this.state.player1, this.state.player2],
       'team2': [this.state.player3, this.state.player4],
-      'score': [this.state.team1score, this.state.team2score],
+      'score': [Number(this.state.team1score), Number(this.state.team2score)],
     }
     // Basic sanity checking
     const players = new Set([this.state.player1, this.state.player2, this.state.player3, this.state.player4]);
