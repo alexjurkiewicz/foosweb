@@ -16,7 +16,7 @@ DYNAMO_KWARGS = {
 }
 CORS_HEADERS = {
     "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent",
+    "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent",  # noqa: E501
     "Access-Control-Allow-Origin": "*",
 }
 

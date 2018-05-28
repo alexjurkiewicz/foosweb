@@ -49,6 +49,7 @@ class Ranking extends Component {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
     })
     .then(response => response.json())
+    .then(responseData => console.log(responseData));
 
     event.preventDefault();
   }

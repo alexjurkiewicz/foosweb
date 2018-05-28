@@ -6,24 +6,29 @@ function precisionRound(number, precision) {
 }
 
 function playerRankEntry(player) {
-  return <li>{player.PlayerName}: {precisionRound(player.mu, 2)} mmr</li>;
+  return <li>{player.PlayerName}: {precisionRound(player.mu, 1)} mmr</li>;
 }
 
 class Ranking extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+
+    // Get player data
     fetch('https://api.foosweb.jurkiewi.cz/player')
       .then(function(response) {
         return response.json();
       })
+      // Sort top to bottom
       .then(function(data) {
-        console.log(data);
         data = data.sort((a, b) => {
           return b.mu - a.mu;
         });
+      })
+      // Add to state
+      .then(function(players) {
         this.setState({
-          "players": data
+          "players": players
         });
       }.bind(this));
   }
@@ -34,8 +39,6 @@ class Ranking extends Component {
       players = this.state.players;
     }
     const newPlayers = players.map(playerRankEntry);
-    console.log(players);
-    console.log(newPlayers);
     return (
       <div className="Ranking">
         <p>Current player ranking:</p>
