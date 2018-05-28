@@ -6,7 +6,7 @@ function precisionRound(number, precision) {
 }
 
 function playerRankEntry(player) {
-  return <li>{player.PlayerName}: {precisionRound(player.mu, 1)} mmr</li>;
+  return <li key={player.PlayerName}>{player.PlayerName}: {precisionRound(player.mu, 1)} mmr</li>;
 }
 
 class Ranking extends Component {
