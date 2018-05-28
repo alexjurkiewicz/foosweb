@@ -20,7 +20,7 @@ class Ranking extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  notifySubmitSuccess = () => toast("Sucessfully submitted game.");
+  notifySubmitSuccess = () => toast.success("Sucessfully submitted game.");
   notifySubmitFailure = () => toast.error("Failed to submit game.");
 
   handleChange(event) {
@@ -55,7 +55,6 @@ class Ranking extends Component {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
     })
     .then(response => {
-      console.log(response);
       if (!response.ok) {
         this.notifySubmitFailure();
         throw Error();
