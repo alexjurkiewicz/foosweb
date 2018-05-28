@@ -13,5 +13,8 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "push": "aws s3 sync --delete build/ s3://foosweb.jurkiewi.cz/"
+  },
+  "devDependencies": {
+    "react-toastify": "^4.0.1"
   }
 }

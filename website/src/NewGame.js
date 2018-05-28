@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
+
 import { KountaPlayers } from './kounta-data';
 
 function optionise(name) {
@@ -16,6 +19,9 @@ class Ranking extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+  notifySubmitSuccess = () => toast("Sucessfully submitted game.");
+  notifySubmitFailure = () => toast.error("Failed to submit game.");
 
   handleChange(event) {
     const target = event.target;
@@ -48,8 +54,21 @@ class Ranking extends Component {
       },
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
     })
-    .then(response => response.json())
-    .then(responseData => console.log(responseData));
+    .then(response => {
+      console.log(response);
+      if (!response.ok) {
+        this.notifySubmitFailure();
+        throw Error();
+      }
+      response.json();
+    })
+    .then(responseData => {
+      // Update the player list with the new MMR data from team1_new and team2_new
+      this.notifySubmitSuccess();
+    })
+    .catch(function(error) {
+      this.notifySubmitFailure();
+    }.bind(this));
 
     event.preventDefault();
   }
@@ -59,6 +78,7 @@ class Ranking extends Component {
 
     return (
       <div action="/match">
+        <ToastContainer closeButton={false} />
         <p>Submit a new match:</p>
         <form onSubmit={this.handleSubmit}>
           <p>
