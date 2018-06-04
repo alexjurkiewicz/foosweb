@@ -15,7 +15,7 @@ class Ranking extends Component {
     this.state = {};
 
     // Get player data
-    fetch('https://api.foosweb.jurkiewi.cz/player')
+    fetch('https://api.foosweb.test.kounta.com/player')
       .then(function(response) {
         return response.json();
       })

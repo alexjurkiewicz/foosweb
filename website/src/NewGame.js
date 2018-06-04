@@ -47,7 +47,7 @@ class Ranking extends Component {
       event.preventDefault(); return;
     }
 
-    fetch('https://api.foosweb.jurkiewi.cz/match', {
+    fetch('https://api.foosweb.test.kounta.com/match', {
       body: JSON.stringify(match),
       headers: {
         'content-type': 'application/json'

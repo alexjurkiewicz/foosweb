@@ -2,18 +2,25 @@
 
 import urllib.request
 import json
+import sys
+import time
 
-import data
+import elo
 
-URL = 'https://sqwn4h3dc6.execute-api.ap-southeast-2.amazonaws.com/dev/match'
+api_id=sys.argv[1]
+
+URL = 'https://%s.execute-api.ap-southeast-2.amazonaws.com/dev/match' % api_id
 
 if __name__ == '__main__':
-    print("Posting %s matches" % len(data.doubles))
-    for game in data.doubles:
+    data = elo.doubles
+    total = len(data)
+    for i in range(len(data)):
+        game = data[i]
         match = {
             'team1': [game[0], game[1]],
             'team2': [game[3], game[4]],
             'score': [game[2], game[5]]
         }
-        print("Posting match %s" % match)
+        print("Posting match #%s/%s" % (i, total))
         urllib.request.urlopen(URL, data=json.dumps(match).encode())
+        time.sleep(1)

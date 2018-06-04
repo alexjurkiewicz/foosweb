@@ -1,26 +1,33 @@
+import sys
+
 # Players and aliases.
-Alex = A = ALEX = 'Alex'
+Alex = A = ALEX = AJ = 'Alex'
 Andy = ANDY = 'Andy'
-Brendan = B = BR = 'Brendan'
+Brendan = B = BR = BRENDAN = 'Brendan'
 Craig = K = CW = CRAIG = KRAG = 'Craig'
-Dylan = DYL = DY = 'Dylan'
+Dylan = DYL = DY = DN = 'Dylan'
 ED = 'Ed'
-Elliot = E = 'Elliot'
-Greg = G = GH = GR = GRE = 'Greg'
-Jack = JACK = 'Jack'
+Elliot = E = ELLIOT = EC = 'Elliot'
+Greg = G = GH = GR = GRE = GREG = 'Greg'
+Jack = JACK = JW = 'Jack'
 Jamie = JA = JAMIE = JH = H = JAM = 'Jamie'
 JC = 'Justin'
 JK = 'Jordan'
-Jingbo = J = JING = 'Jingbo'
+JOSH = 'Josh'
+Jingbo = J = JING = JB = JI = 'Jingbo'
 Maya = M2 = MA = MAYA = 'Maya'
 Michael = M = MC = 'Michael C'
 MichaelLee = ML = MLE = L = 'Michael L'
-Milos = D = MD = MI = MIL = 'Milos'
-Nick = N = NICK = NICHOLAS = 'Nick'
+Milos = D = MD = MI = MIL = MILOS = 'Milos'
+Nick = N = NICK = NICHOLAS = NC = NI = 'Nick C'
+NW = 'Nick W'
 Omid = O = OM = 'Omid'
+RAJ = 'Rajan'
+S = 'Scott'
 Simon = 'Simon H'
-SimonL = SL = SLG = SIML = 'Simon L'
+SimonL = SL = SLG = SIML = SIMONL = 'Simon L'
 Will = W = WILL = 'Will D'
+V = 'Vorakot'
 
 # Games.
 doubles = [
@@ -206,6 +213,10 @@ doubles = [
     [JC, MI, 10, B, JACK, 9],
     [MI, ML, 10, B, JACK, 5],
     [MI, ML, 10, B, JACK, 4],
+    [M, G, 10, ELLIOT, SIMONL, 6],
+    [M, G, 10, ELLIOT, SIMONL, 8],
+    [M, G, 10, JAMIE, JC, 6],
+    [M, G, 4, JAMIE, JC, 10],
     [E, MI, 3, J, MLE, 10],
     [G, MI, 10, JC, SLG, 1],
     [G, MI, 10, JC, SLG, 1],
@@ -237,5 +248,94 @@ doubles = [
     [MLE, JACK, 10, ALEX, SIML, 7],
     [JAM, SLG, 10, GRE, NICK, 9],
     [JAM, GRE, 10, J, E, 7],
-    [E, J, 10, MAYA, JAM, 6]
+    [E, J, 10, MAYA, JAM, 6],
+
+    [SLG, MD, 10, JC, ML, 6],
+    [JC, ML, 10, SLG, MD, 3],
+    [JC, MD, 10, DN, NW, 4],
+    [JC, MD, 10, AJ, DN, 4],
+    [JC, JH, 10, MD, DN, 5],
+    [JC, JH, 10, EC, DN, 2],
+    [JC, JH, 10, EC, DN, 3],
+    [JC, JH, 10, JB, AJ, 3],
+    [J, D, 10, A, E, 3],
+    [JAM, E, 9, J, JC, 10],
+    [A, RAJ, 10, MAYA, V, 5],
+    [E, B, 10, G, N, 7],
+    [JH, JC, 10, NC, B, 2],
+    [JH, JC, 10, NC, B, 2],
+    [SLG, MIL, 10, B, NI, 5],
+    [SLG, MIL, 8, B, NI, 10],
+    [G, JAMIE, 10, J, B, 3],
+    [G, JAMIE, 9, J, B, 10],
+    [JC, JAMIE, 10, MI, G, 7],
+    [J, N, 9, SLG, MIL, 10],
+    [JAM, J, 10, E, MAYA, 5],
+    [MA, G, 3, E, J, 10],
+    [E, J, 10, JC, JAM, 9],
+    [E, J, 9, JC, JAM, 10],
+    [N, G, 3, B, J, 10],
+    [N, G, 5, B, J, 10],
+    [JC, JH, 10, GH, NC, 3],
+    [JC, JH, 10, GH, NC, 4],
+    [JC, JH, 10, GH, NC, 5],
+
+    [MILOS, SLG, 10, NICK, BRENDAN, 6],
+    [MILOS, SLG, 10, NICK, BRENDAN, 7],
+    [MILOS, SLG, 10, NICK, JAMIE, 6],
+
+    [E,B,10,JC,N,7],
+    [B,JW,10,JC,N,8,],
+    [E,MA,8,JACK,MLE,10],
+    [MLE,JACK,3,JC,NICK,10],
+    [MLE,JACK,10,JC,NICK,6],
+    [MLE,JACK,6,JC,NICK,10],
+    [E,B,10,JC,NICK,8],
+    [E,B,10,JC,NICK,5],
+    [G,NICK,10,MILOS,SLG,8],
+    [JAMIE,MC,10,G,NICK,6],
+    [G,SLG,9,JAMIE,NICK,10],
+    [G,SLG,7,JAMIE,NICK,10],
+    [SLG,MI,7,JI,N,10],
+    [EC,MC,10,MD,NC,7],
+    [E,M,10,K,N,7],
+    [E,M,10,MI,N,8],
+    [NC,MD,5,SLG,MC,10],
+    [NC,MD,8,SLG,MC,10],
+    [E,JC,10,MI,MLE,6],
+    [E,N,3,MI,JC,10],
+    [J,MLE,10,M,JC,7],
+    [E,B,10,MC,MIL,3],
+    [E,B,10,JA,JC,6],
+    [E,B,10,M,SLG,9],
+    [JH,MC,10,S,EC,1],
+    [E,B,10,J,M,7],
+
+    [J,MI,10,E,B,6],
+    [J,MI,10,E,B,6],
+    [G,SLG,10,JAMIE,JC,1],
+    [G,SLG,7,JAMIE,JC,10],
+    [B,J,10,JC,JAMIE,9],
+    [B,J,10,E,MAYA,4],
+    [E,B,10,J,MA,6],
+    [G,SLG,10,E,B,5],
+    [G,SLG,10,E,B,5],
+    [G,SLG,10,E,B,5],
+    [JC,EC,10,BR,MC,6],
+    [JC,EC,9,BR,MC,10],
+    [JC,EC,1,BR,MC,10],
+    [JC,JH,10,BR,MC,6],
+    [JC,JOSH,4,BR,MC,10],
+    [MD,MC,10,NC,SLG,8],
+    [MD,MC,10,NC,SLG,6],
+    [MD,MC,10,NC,SLG,6],
+    [MD,MC,10,CW,NW,2],
+    [E,M,8,D,JC,10],
+    [E,M,10,D,JC,6],
+    [E,B,10,MI,O,4],
+    [E,B,10,MI,JACK,8],
+    [E,B,9,MI,J,10],
+    [E,B,10,N,J,6],
+    [E,B,4,N,J,10],
+    [JC,N,10,E,B,8],
 ]
